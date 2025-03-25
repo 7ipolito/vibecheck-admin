@@ -34,6 +34,13 @@ export interface CreatePostParams {
   image: string;
 }
 
+export interface CreateTicketParams {
+  eventID: string;
+  type: string;
+  price: number;
+  bucketUrl: string;
+}
+
 export interface GetPostParams {
   name: string;
   image: string;

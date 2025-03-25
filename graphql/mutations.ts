@@ -59,6 +59,29 @@ export const CREATE_POST = gql`
   }
 `;
 
+export const CREATE_TICKET = gql`
+  mutation CreateTicket(
+    $eventId: String!
+    $type: String!
+    $price: Float!
+    $bucketUrl: String
+  ) {
+    createTicket(
+      createTicketInput: {
+        eventId: $eventId
+        type: $type
+        price: $price
+        bucketUrl: $bucketUrl
+      }
+    ) {
+      id
+      type
+      price
+      bucketUrl
+    }
+  }
+`;
+
 export const LIKE_POST = gql`
   mutation LikePost($likePostInput: LikePostInput!) {
     likePost(likePostInput: $likePostInput) {

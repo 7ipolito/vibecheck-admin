@@ -11,9 +11,9 @@ export const GET_WHOAMI = gql`
 export const GET_POSTS = gql`
   query {
     posts {
+      id
       name
       image
-      description
     }
   }
 `;
