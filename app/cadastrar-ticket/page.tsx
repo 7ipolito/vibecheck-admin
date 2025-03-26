@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { gql, useApolloClient } from "@apollo/client";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,7 +18,6 @@ import { UploadButton } from "@/utils/uploadthing";
 import client from "@/lib/client";
 import { GET_POSTS } from "@/graphql/queries";
 import { createTicket } from "@/lib/actions/ticket.action";
-import { type } from "os";
 
 const CREATE_TICKET_MUTATION = gql`
   mutation CreateTicket($input: CreateTicketDto!) {
@@ -39,6 +39,7 @@ export default function CadastrarTicket() {
   const [error, setError] = useState<Error | null>(null);
   const [posts, setPosts] = useState<[]>([]); // Você pode criar uma interface/types para o tipo Post
   const [imagemUrl, setImagemUrl] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -54,7 +55,7 @@ export default function CadastrarTicket() {
     };
 
     fetchPosts();
-  }, [client]);
+  }, []);
 
   const handleFileComplete = (res: any) => {
     setImagemUrl(res[0].ufsUrl);
@@ -82,6 +83,7 @@ export default function CadastrarTicket() {
       console.log("Resposta da API:", response);
 
       alert("Ticket cadastrado com sucesso!");
+      router.push("/"); // Redireciona para a tela inicial
     } catch (err) {
       console.error("Erro ao criar o ticket:", err);
       setError(err as Error);

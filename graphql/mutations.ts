@@ -52,7 +52,7 @@ export const DELETE_USER = gql`
 export const CREATE_POST = gql`
   mutation CreateSimplePost($name: String!, $image: String!) {
     createPost(createPostInput: { name: $name, image: $image }) {
-      id
+      _id
       name
       image
     }

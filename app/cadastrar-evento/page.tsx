@@ -2,6 +2,7 @@
 
 import type React from "react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -13,11 +14,13 @@ import { UploadButton } from "@/utils/uploadthing";
 export default function CadastrarEvento() {
   const [titulo, setTitulo] = useState("");
   const [imagemUrl, setImagemUrl] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleImageUploadComplete = (res: any) => {
     setImagemUrl(res[0].ufsUrl); // Supondo que `fileUrl` é a chave correta
     console.log("Imagem carregada:", res);
   };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -30,8 +33,9 @@ export default function CadastrarEvento() {
         name: titulo,
         image: imagemUrl,
       };
-      const response = await createSimplePost(userData);
-      console.log("Resposta da API:", response);
+      await createSimplePost(userData);
+      alert("Evento criado com sucesso!");
+      router.push("/"); // Redireciona para a tela inicial
     } catch (error) {
       console.error("Erro ao cadastrar evento:", error);
     }
