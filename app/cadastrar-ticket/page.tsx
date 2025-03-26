@@ -134,7 +134,7 @@ export default function CadastrarTicket() {
               </SelectTrigger>
               <SelectContent>
                 {posts.map((post) => (
-                  <SelectItem key={post.id} value={post.id}>
+                  <SelectItem key={post._id} value={post._id}>
                     {post.name}
                   </SelectItem>
                 ))}
